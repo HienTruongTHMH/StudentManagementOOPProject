@@ -9,6 +9,7 @@ import Login_test.Connection.DatabaseConnection;
 import Login_test.model.modelLogin;
 import Login_test.model.modelUser;
 import Login_test.service.ServiceUser;
+import com.formdev.flatlaf.FlatLightLaf;
 import com.sun.jdi.connect.spi.Connection;
 import java.awt.Color;
 import java.sql.SQLException;
@@ -18,6 +19,7 @@ import java.text.DecimalFormat;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -207,7 +209,7 @@ public class Main extends javax.swing.JFrame {
             showMessage(Message.MessageType.ERROR, "Error Login");
         }
     }
-    
+
     private void showLoadLogTeacher() {
         loading.setVisible(true);
         // Sử dụng Timer để ẩn loading sau 2 giây  
@@ -263,6 +265,12 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        }
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
