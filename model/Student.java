@@ -4,6 +4,7 @@
  */
 package demoOOPStudentManagement.model;
 
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -21,6 +22,19 @@ public class Student {
     private float scoreMidTerm, scoreFinal, scoreAverage;
 
     public Student(){}
+
+    public Student(String studentID, String studentFullName, String dateOfBirth, String major, byte gender, String address, String phoneNumber, float scoreMidTerm) {
+        this.studentID = studentID;
+        this.studentFullName = studentFullName;
+        this.dateOfBirth = dateOfBirth;
+        this.major = major;
+        this.gender = gender;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.scoreMidTerm = scoreMidTerm;
+    }
+    
+    
 
     public Student(String studentFullName, String dateOfBirth, String major, byte gender, String address, String phoneNumber, float scoreMidTerm, float scoreFinal, float scoreAverage) {
         this.studentFullName = studentFullName;
@@ -45,6 +59,10 @@ public class Student {
         this.scoreMidTerm = scoreMidTerm;
         this.scoreFinal = scoreFinal;
         this.scoreAverage = scoreAverage;
+    }
+
+    public Student(String studentID, String fullName, String major, byte gender, String date, String phone) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public String getStudentID() {

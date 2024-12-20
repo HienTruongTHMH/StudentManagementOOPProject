@@ -36,13 +36,7 @@ public class classListManagerment {
     public static void main(String[] args) {
         classListManagerment cList = new classListManagerment();
         
-        uniClass c1 = new uniClass("C01","Công Nghệ Thông Tin", "Lập Trình Java", (int)30);
-        uniClass c2 = new uniClass("C02","Toán Học", "Giải Tích 1", 25);
-        uniClass c3 = new uniClass("C03","Ngôn Ngữ", "Tiếng Anh Cơ Bản", 40);
         
-        cList.insert(c1);
-        cList.insert(c2);
-        cList.insert(c3);
         
     }
      

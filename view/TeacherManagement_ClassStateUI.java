@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  * @author hientruongthmh
  */
 public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form TeacherManagement_ClassStateUI
      * @param stt
@@ -25,6 +25,8 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
      * @param studentsCount
      */
     
+    public TeacherManagementStateUI teacherManagementStateUI = new TeacherManagementStateUI();
+    
     public TeacherManagement_ClassStateUI(int stt, String classID, String major, String className, int studentsCount){
         setTitle("Class Details: " + className);
         setSize(600, 400);
@@ -32,6 +34,15 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
         setLayout(new FlowLayout());
         
     }
+    
+    
+    
+    public void runNewView(){
+        teacherManagementStateUI.setVisible(true);
+        this.setVisible(false);
+    }
+    
+    
     
     public TeacherManagement_ClassStateUI() {
         initComponents();
@@ -41,6 +52,8 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
         btCapNhapDiem.addActionListener(btClick);
         btLuu.addActionListener(btClick);
         btDiemDanh.addActionListener(btClick);
+        
+        
 
     }
 
@@ -141,7 +154,7 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
 
         btLuu.setText("Lưu");
 
-        btDiemDanh.setText("Điểm danh");
+        btDiemDanh.setText("Chốt điểm");
         btDiemDanh.setToolTipText("");
 
         jButton1.setText("Tìm");
@@ -156,9 +169,10 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
@@ -167,16 +181,13 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
                             .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
                             .addComponent(jTextField2))
                         .addGap(149, 149, 149)
-                        .addComponent(btNhapDiem)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btNhapDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btLuu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(btCapNhapDiem)
-                        .addGap(18, 18, 18)
-                        .addComponent(btLuu)
-                        .addGap(18, 18, 18)
-                        .addComponent(btDiemDanh))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btCapNhapDiem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btDiemDanh, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -187,13 +198,18 @@ public class TeacherManagement_ClassStateUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btNhapDiem)
-                    .addComponent(btCapNhapDiem)
-                    .addComponent(btDiemDanh)
-                    .addComponent(btLuu))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btCapNhapDiem))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btLuu)
+                            .addComponent(btDiemDanh))))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(14, Short.MAX_VALUE))

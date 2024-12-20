@@ -12,12 +12,15 @@ public class uniClass {
     private String classID;
     private String className;
     private String major;
+
+    private String room;
     private int studentsCount;
 
-    public uniClass(String classID, String className, String major, int studentsCount) {
+    public uniClass(String classID, String className, String major,String room, int studentsCount) {
         this.classID = classID;
         this.className = className;
         this.major = major;
+        this.room = room;
         this.studentsCount = studentsCount;
     }
 
@@ -44,6 +47,14 @@ public class uniClass {
     public void setMajor(String major) {
         this.major = major;
     }
+    
+    public String getRoom() {
+        return room;
+    }
+
+    public void setRoom(String room) {
+        this.room = room;
+    }
 
     public int getStudentsCount() {
         return studentsCount;
@@ -51,6 +62,11 @@ public class uniClass {
 
     public void setStudentsCount(int studentsCount) {
         this.studentsCount = studentsCount;
+    }
+
+    @Override
+    public String toString() {
+        return "uniClass{" + "classID=" + classID + ", className=" + className + ", major=" + major + ", room=" + room + ", studentsCount=" + studentsCount + '}';
     }
     
     

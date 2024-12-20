@@ -23,15 +23,18 @@ public class TeacherManagement_ClassStateController implements ActionListener{
         this.teacherManageView = teacherManageView;
     }
 
-    
     public TeacherManagement_ClassStateController(TeacherManagement_ClassStateUI teacherClassUI) {
         this.teacherClassView = teacherClassUI;
     }
+    
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
         String button = e.getActionCommand();
         JOptionPane.showMessageDialog(teacherClassView, "Bạn vừa nhấn vào: " + button);
     }
+    
+    
     
 }

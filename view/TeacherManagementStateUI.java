@@ -4,85 +4,39 @@
  */
 package demoOOPStudentManagement.view;
 
+import demoOOPStudentManagement.database.JDBCUtils;
 import demoOOPStudentManagement.model.classListManagerment;
 import demoOOPStudentManagement.model.uniClass;
-import java.util.ArrayList;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author hientruongthmh
  */
 public class TeacherManagementStateUI extends javax.swing.JFrame {
-
     /**
      * Creates new form TeacherManagementStateUI
      */
-    public classListManagerment classListTeacherManager = new classListManagerment();
+    
+    public TeacherManagement_ClassStateUI teacherClassStateView = new TeacherManagement_ClassStateUI();
+    public static classListManagerment classList = new classListManagerment();
+    
+    public String url = "jdbc:mysql://localhost:3306/studentManagermentDatabase";
+    public String username = "root";
+    public String password = "";
     
     public TeacherManagementStateUI() {
         initComponents();
-        String[] columns = {"Số Thứ Tự", "Mã Lớp", "Chuyên Ngành", "Tên Lớp", "Số Lượng Sinh Viên"};
-
-        ArrayList<Object[]> rowData = new ArrayList<>();
-        int index = 1; // Số thứ tự
-        for (uniClass c : classListTeacherManager.getClassList()) {
-            rowData.add(new Object[]{
-                index++, // Số thứ tự tự tăng
-                c.getClassID(),
-                c.getClassName(),
-                c.getMajor(),
-                c.getStudentsCount()
-            });
-        }
-
-        Object[][] data = rowData.toArray(new Object[0][]);
-
-        model_TableDSLop = new DefaultTableModel(data, columns);
-        tbDSlop.setModel(model_TableDSLop);
-
-        ListSelectionModel modelSelected = tbDSlop.getSelectionModel();
-
-        modelSelected.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        modelSelected.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-
-        });
-
+        //displayTable();      
     }
     
 
         
-    /*
-    tbDSlop.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selectedRow = tbDSlop.getSelectedRow();
-                    if (selectedRow >= 0) {
-                        // Lấy các giá trị từ các cột trong bảng khi chọn một lớp
-                        int stt = (int) tbDSlop.getValueAt(selectedRow, 0); // Số Thứ Tự
-                        String classID = (String) tbDSlop.getValueAt(selectedRow, 1); // Mã Lớp
-                        String major = (String) tbDSlop.getValueAt(selectedRow, 2); // Chuyên Ngành
-                        String className = (String) tbDSlop.getValueAt(selectedRow, 3); // Tên Lớp
-                        int studentCount = (int) tbDSlop.getValueAt(selectedRow, 4); // Số Lượng Sinh Viên
-
-                        // Mở TeacherManagement_ClassStateUI với các thông tin lớp học
-                        openClassDetails(stt, classID, major, className, studentCount);
-                    }
-                }
-            }
-        });
-       */
+    
     
     
     /**
@@ -264,12 +218,28 @@ public class TeacherManagementStateUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        try {
+            //Connect tới server:
+            Connection ct = JDBCUtils.getConnection();
+            //Tạo statement:
+            String querry = "Select * From ClassList";
+            Statement sta = ct.createStatement();
+            //Tạo result:
+            ResultSet rs = sta.executeQuery(querry);
+            
+            rs.close();
+            sta.close();
+            ct.close();
+        } catch (Exception e) {
+        }//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -286,29 +256,24 @@ public class TeacherManagementStateUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TeacherManagementStateUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TeacherManagementStateUI().setVisible(true);
             }
         });
-        
-        
-        // Khởi tạo classListManagerment
-        classListManagerment cList = new classListManagerment();
-        // Thêm dữ liệu vào danh sách lớp
-        uniClass c1 = new uniClass("C01", "Công Nghệ Thông Tin", "Lập Trình Java", 30);
-        uniClass c2 = new uniClass("C02", "Toán Học", "Giải Tích 1", 25);
-        uniClass c3 = new uniClass("C03", "Ngôn Ngữ", "Tiếng Anh Cơ Bản", 40);
-        cList.insert(c1);
-        cList.insert(c2);
-        cList.insert(c3);
+      
     }
     
-    //Tự thêm
-    public DefaultTableModel model_TableDSLop;
+    public void runNewView(){
+        teacherClassStateView.setVisible(true);
+        this.setVisible(false);
+    }
+
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane SPDSlop;
@@ -323,10 +288,5 @@ public class TeacherManagementStateUI extends javax.swing.JFrame {
     private javax.swing.JTable tbThoiKhoaBieu;
     // End of variables declaration//GEN-END:variables
 
-    private void openClassDetails(int serialNumber, String classCode, String department, String className, int studentCount) {
-    // Truyền các thông tin vào TeacherManagement_ClassStateUI
-        TeacherManagement_ClassStateUI classUI = new TeacherManagement_ClassStateUI(serialNumber, classCode, department, className, studentCount);
-        classUI.setVisible(true);
-        this.setVisible(false); // Ẩn TeacherManagementStateUI nếu không muốn mở song song
-    }
+    
 }

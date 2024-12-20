@@ -6,6 +6,8 @@ package demoOOPStudentManagement.test;
 
 import demoOOPStudentManagement.database.JDBCUtils;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -13,7 +15,6 @@ import java.sql.Connection;
  */
 public class testJDBCUtils {
     public static void main(String[] args) {
-        Connection connection = JDBCUtils.getConnection();
-        System.out.println(connection);
+        
     }
 }
