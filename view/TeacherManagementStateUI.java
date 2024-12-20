@@ -4,6 +4,9 @@
  */
 package demoOOPStudentManagement.view;
 
+import demoOOPStudentManagement.model.classListManagerment;
+import demoOOPStudentManagement.model.uniClass;
+import java.util.ArrayList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -20,34 +23,45 @@ public class TeacherManagementStateUI extends javax.swing.JFrame {
     /**
      * Creates new form TeacherManagementStateUI
      */
+    public classListManagerment classListTeacherManager = new classListManagerment();
+    
     public TeacherManagementStateUI() {
-        initComponents();    
+        initComponents();
         String[] columns = {"Số Thứ Tự", "Mã Lớp", "Chuyên Ngành", "Tên Lớp", "Số Lượng Sinh Viên"};
-        Object[][] data = {
-            {1, "CS101", "Công Nghệ Thông Tin", "Lập Trình Java", 30},
-            {2, "MATH101", "Toán Học", "Giải Tích 1", 25},
-            {3, "ENG101", "Ngôn Ngữ", "Tiếng Anh Cơ Bản", 40},
-            {4, "PHY101", "Vật Lý", "Cơ Học", 35},
-            {5, "CHEM101", "Hóa Học", "Hóa Học Đại Cương", 20}
-        };
+
+        ArrayList<Object[]> rowData = new ArrayList<>();
+        int index = 1; // Số thứ tự
+        for (uniClass c : classListTeacherManager.getClassList()) {
+            rowData.add(new Object[]{
+                index++, // Số thứ tự tự tăng
+                c.getClassID(),
+                c.getClassName(),
+                c.getMajor(),
+                c.getStudentsCount()
+            });
+        }
+
+        Object[][] data = rowData.toArray(new Object[0][]);
 
         model_TableDSLop = new DefaultTableModel(data, columns);
         tbDSlop.setModel(model_TableDSLop);
-        
+
         ListSelectionModel modelSelected = tbDSlop.getSelectionModel();
-        
+
         modelSelected.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        
-        modelSelected.addListSelectionListener(new ListSelectionListener(){
+
+        modelSelected.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             }
-        
+
         });
-        
+
     }
     
+
+        
     /*
     tbDSlop.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -280,6 +294,17 @@ public class TeacherManagementStateUI extends javax.swing.JFrame {
                 new TeacherManagementStateUI().setVisible(true);
             }
         });
+        
+        
+        // Khởi tạo classListManagerment
+        classListManagerment cList = new classListManagerment();
+        // Thêm dữ liệu vào danh sách lớp
+        uniClass c1 = new uniClass("C01", "Công Nghệ Thông Tin", "Lập Trình Java", 30);
+        uniClass c2 = new uniClass("C02", "Toán Học", "Giải Tích 1", 25);
+        uniClass c3 = new uniClass("C03", "Ngôn Ngữ", "Tiếng Anh Cơ Bản", 40);
+        cList.insert(c1);
+        cList.insert(c2);
+        cList.insert(c3);
     }
     
     //Tự thêm
