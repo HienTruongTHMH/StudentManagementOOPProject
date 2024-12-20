@@ -1,13 +1,16 @@
 package DashBoard_test.main;
 
-import DashBoard_test.component.Header;
+import DashBoard_test.component.SettingSinhVien;
 import DashBoard_test.component.defaultForm;
 import DashBoard_test.menu.menuEvent;
+import Login_test.Connection.DatabaseConnection;
 import Login_test.model.modelUser;
+import Login_test.service.ServiceUser;
 import UI.StudentUI.AnnouncementPanel;
 import UI.StudentUI.OverViewGradeStudent;
 import UI.StudentUI.ProfileStudent;
 import java.awt.Component;
+import java.sql.SQLException;
 
 public class MainSystem extends javax.swing.JFrame {
 
@@ -16,6 +19,14 @@ public class MainSystem extends javax.swing.JFrame {
     public MainSystem(modelUser user) {
         initComponents();
         this.user = user;
+
+        try {
+            ServiceUser serviceUser = new ServiceUser();
+            String studentName = serviceUser.getHoVaTen(user.getUserID());
+            header1.updateStudentName(studentName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         menu1.setEvent(new menuEvent() {
             @Override
@@ -33,7 +44,9 @@ public class MainSystem extends javax.swing.JFrame {
                 } else if (index == 2 && subIndex == 2) {
                     showForm(new OverViewGradeStudent(user));
                 } else if (index == 2 && subIndex == 4) {
-                    showForm(new ProfileStudent());
+                    showForm(new ProfileStudent(user));
+                } else if (index == 4 && subIndex == 0) {
+                    showForm(new SettingSinhVien());
                 } else {
                     showForm(new defaultForm("Form: " + index + " " + subIndex));
                 }
@@ -88,9 +101,10 @@ public class MainSystem extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
                     .addComponent(jpBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 

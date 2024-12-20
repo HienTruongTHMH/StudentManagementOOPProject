@@ -9,7 +9,6 @@ public class modelUser {
     // Constructor đầy đủ
     public modelUser(int userID, String email, String password) {
         this.userID = userID;
-
         this.email = email;
         this.password = password;
     }

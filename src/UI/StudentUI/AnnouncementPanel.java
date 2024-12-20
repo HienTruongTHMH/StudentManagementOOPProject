@@ -9,9 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import net.miginfocom.swing.MigLayout;
-import raven.alerts.MessageAlerts;
-import raven.popup.component.PopupCallbackAction;
-import raven.popup.component.PopupController;
+
 
 public class AnnouncementPanel extends JPanel {
 public AnnouncementPanel() {

@@ -1,5 +1,6 @@
 package Login_test.Main;
 
+import DashBoard_GiangVien.main.MainTeacher;
 import DashBoard_test.main.MainSystem;
 import Login_test.Component.Message;
 import Login_test.Component.PanelCover;
@@ -7,17 +8,18 @@ import Login_test.Component.PanelLoading;
 import Login_test.Component.PanelLoginAndSelected;
 import Login_test.Connection.DatabaseConnection;
 import Login_test.model.modelLogin;
+import Login_test.model.modelLoginTeacher;
 import Login_test.model.modelUser;
 import Login_test.service.ServiceUser;
+import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.sun.jdi.connect.spi.Connection;
-import java.awt.Color;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import net.miginfocom.swing.MigLayout;
@@ -52,7 +54,6 @@ public class Main extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showLoadLogTeacher();
-
             }
         };
         ActionListener eventLogStudent = new ActionListener() {
@@ -210,14 +211,34 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
+    private void LoginTeacher() {//Bước này để chạy check TK teacher và bỏ vào showloading
+        modelLoginTeacher dataTeacher = loginAndSelected.getDataLoginTeacher();
+        try {
+            modelUser userTeacher = service.loginTeacher(dataTeacher);
+            if (userTeacher != null) {
+                this.dispose();
+                //new MainTeacher(userTeacher).setVisible(true);
+                MainTeacher mainTeacherFrame = new MainTeacher(userTeacher);
+                mainTeacherFrame.setVisible(true);
+                //System.out.println("Đăng nhập thành công giáo viên");
+            } else {
+                showMessage(Message.MessageType.ERROR, "Email and Password error!");
+            }
+        } catch (SQLException e) {
+            showMessage(Message.MessageType.ERROR, "Error Login");
+        }
+    }
+
     private void showLoadLogTeacher() {
         loading.setVisible(true);
         // Sử dụng Timer để ẩn loading sau 2 giây  
-        Timer timer = new Timer(2000, new ActionListener() {
+        Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loading.setVisible(false);
                 ((Timer) e.getSource()).stop();
+                //LoginTeacher();
+                SwingUtilities.invokeLater(() -> LoginTeacher());
             }
         });
         timer.setRepeats(false); // Chạy một lần  
@@ -265,6 +286,7 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     public static void main(String args[]) {
+
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {

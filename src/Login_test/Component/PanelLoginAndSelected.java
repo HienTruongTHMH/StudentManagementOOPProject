@@ -1,24 +1,16 @@
 package Login_test.Component;
 
 import Login_test.model.modelLogin;
+import Login_test.model.modelLoginTeacher;
 import Login_test.swing.Button;
-import Login_test.swing.MyPasswordField;
-import Login_test.swing.MyTextField;
 import Login_test.swing.PasswordField;
 import Login_test.swing.TextField;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
@@ -29,6 +21,11 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
         return dataLogin;
     }
     private modelLogin dataLogin;
+
+    public modelLoginTeacher getDataLoginTeacher() {
+        return dataLoginTeacher;
+    }
+    private modelLoginTeacher dataLoginTeacher;
 
     public PanelLoginAndSelected(ActionListener eventLogTeacher, ActionListener eventLogStudent) {
         initComponents();
@@ -47,7 +44,6 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(48, 124, 235));
         jPselected.add(label);
-
 //        MyTextField txtEmail = new MyTextField();
 //        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/Login_test/icon/mail.png")));
 //        txtEmail.setHint("Enter your email");
@@ -81,6 +77,14 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
         cmd.addActionListener(eventLogTeacher);
         cmd.setText("Sign in");
         jPselected.add(cmd, "w 40%, h 40");
+        cmd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                String email = txtEmail.getText().trim();
+                String pass = String.valueOf(txtPassword.getPassword());
+                dataLoginTeacher = new modelLoginTeacher(email, pass);
+            }
+        });
     }
 
     private void initLogin(ActionListener eventLogStudent) {
@@ -89,7 +93,6 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
         label.setFont(new Font("sansserif", 1, 30));
         label.setForeground(new Color(12, 106, 185));
         jPLogin.add(label);
-
 //        MyTextField txtEmail = new MyTextField();
 //        txtEmail.setPrefixIcon(new ImageIcon(getClass().getResource("/Login_test/icon/mail.png")));
 //        txtEmail.setHint("Enter your email");
@@ -110,7 +113,7 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
         txtPassword.setLineColor(new Color(48, 124, 235));
         txtPassword.setShowAndHide(true);
         jPLogin.add(txtPassword, "w 60%");
-        
+
         JButton cmdForgetButton2 = new JButton("Forgot your password?");
         cmdForgetButton2.setForeground(new Color(100, 100, 100));
         cmdForgetButton2.setFont(new Font("sansserif", 1, 12));
@@ -162,7 +165,6 @@ public class PanelLoginAndSelected extends javax.swing.JLayeredPane {
 //            }
 //        });
 //    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

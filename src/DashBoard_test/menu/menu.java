@@ -1,6 +1,5 @@
 package DashBoard_test.menu;
 
-import DashBoard_test.component.Header;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
@@ -31,7 +30,7 @@ public class menu extends JComponent {
         {"Anouncement"},
         {"Personal", "Schedule", "Kết quả học tập", "Phúc Khảo", "Thông tin cá nhân"},
         {"Đăng kí", "Đăng kí tín chỉ", "Lớp học đăng kí", "Chương trình học"},
-        {"Setting"}
+        {"Đăng Xuất"}
     };
 
     public menu() {

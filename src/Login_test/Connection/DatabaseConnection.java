@@ -1,4 +1,3 @@
-
 package Login_test.Connection;
 
 import java.sql.DriverManager;
@@ -31,7 +30,6 @@ public class DatabaseConnection {
             try {
                 // Đăng ký driver (nếu cần)
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
                 // Tạo kết nối
                 connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
                 System.out.println("Kết nối cơ sở dữ liệu thành công!");
@@ -47,8 +45,13 @@ public class DatabaseConnection {
     }
 
     public Connection getConnection() {
+        try {
+            if (connection == null || connection.isClosed()) {
+                connectToDatabase();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return connection;
     }
 }
-
-

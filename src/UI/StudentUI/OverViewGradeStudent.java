@@ -8,8 +8,6 @@ import UI.Component.ScrollBarWin11UI;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,7 +17,7 @@ import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 public class OverViewGradeStudent extends javax.swing.JPanel {
-    
+
     public int getMaSV() {
         return maSV;
     }
@@ -30,7 +28,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
 
     private int maSV;
     private Map<String, modelHocKy> hocKyMap = new HashMap<>();
-    
+
     public OverViewGradeStudent(modelUser user) {
         initComponents();
         this.maSV = user.getUserID(); // Lưu mã sinh viên
@@ -41,29 +39,29 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.DEFAULT);
         TableCustom.apply(jScrollPane2, TableCustom.TableType.DEFAULT);
     }
+
     //Custom Table, ComboBox
     private void customizeComponents() {
-    cbChonBangDiem.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 14)); // Font chữ
-    cbChonBangDiem.setForeground(new java.awt.Color(64, 128, 255)); // Màu chữ
-    cbChonBangDiem.setBackground(java.awt.Color.WHITE); // Màu nền
-    
-    
-    //màu nền
-    java.awt.Color backgroundColor = new java.awt.Color(255,255,255); // Màu nền
+        cbChonBangDiem.setFont(new java.awt.Font("SansSerif", java.awt.Font.BOLD, 14)); // Font chữ
+        cbChonBangDiem.setForeground(new java.awt.Color(64, 128, 255)); // Màu chữ
+        cbChonBangDiem.setBackground(java.awt.Color.WHITE); // Màu nền
 
-    // Đặt màu nền cho JPanel chứa tổng thể
-    this.setBackground(backgroundColor);
-    
-    // Đặt màu nền cho từng JPanel
-    jpTong.setBackground(backgroundColor);
-    jPanel1.setBackground(backgroundColor);
+        //màu nền
+        java.awt.Color backgroundColor = new java.awt.Color(255, 255, 255); // Màu nền
 
-    // Đặt màu nền cho JScrollPane nếu cần
-    jScrollPane1.getViewport().setBackground(backgroundColor);
-    jScrollPane2.getViewport().setBackground(backgroundColor);
-    jScrollPane3.getViewport().setBackground(backgroundColor);
-}
-    
+        // Đặt màu nền cho JPanel chứa tổng thể
+        this.setBackground(backgroundColor);
+
+        // Đặt màu nền cho từng JPanel
+        jpTong.setBackground(backgroundColor);
+        jPanel1.setBackground(backgroundColor);
+
+        // Đặt màu nền cho JScrollPane nếu cần
+        jScrollPane1.getViewport().setBackground(backgroundColor);
+        jScrollPane2.getViewport().setBackground(backgroundColor);
+        jScrollPane3.getViewport().setBackground(backgroundColor);
+    }
+
     private void populateComboBox() {
         cbChonBangDiem.removeAllItems(); // Xóa các item cũ
         hocKyMap.clear(); // Xóa dữ liệu cũ trong Map
@@ -124,7 +122,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
             ResultSet rsSummary = psSummary.executeQuery();
 
             while (rsSummary.next()) {
-                model1.addRow(new Object[]{ 
+                model1.addRow(new Object[]{
                     rsSummary.getInt("MaHocKy"), // Mã học kỳ
                     rsSummary.getInt("TinChiTichLuy"),
                     rsSummary.getInt("TinChiHocLai"),
@@ -213,11 +211,25 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class[]{
-                Integer.class, String.class, Integer.class, Double.class, Double.class, Double.class, Double.class, Double.class, Double.class, Double.class, String.class, Boolean.class
+                Integer.class
+                , String.class
+                , Integer.class
+                , Double.class
+                , Double.class
+                , Double.class
+                , Double.class
+                , Double.class
+                , Double.class
+                , Double.class
+                , String.class
+                , Boolean.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
+            }
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return false; // Đặt tất cả cột không thể chỉnh sửa
             }
         });
         jTable2.setRowHeight(40);
@@ -249,7 +261,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
             }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+                return false;
             }
         });
         jTable1.setToolTipText("");
@@ -273,7 +285,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
         jpHCN1.setLayout(jpHCN1Layout);
         jpHCN1Layout.setHorizontalGroup(
             jpHCN1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jpHCN1Layout.setVerticalGroup(
             jpHCN1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,7 +298,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
         jpHCN2.setLayout(jpHCN2Layout);
         jpHCN2Layout.setHorizontalGroup(
             jpHCN2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 49, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jpHCN2Layout.setVerticalGroup(
             jpHCN2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -352,7 +364,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
                         .addComponent(jCheckBox1)
                         .addGap(0, 0, 0)
                         .addComponent(jLabel7)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,27 +396,30 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
         jpTongLayout.setHorizontalGroup(
             jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpTongLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpTongLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
                             .addGroup(jpTongLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(12, 12, 12)
-                                .addComponent(cbChonBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jpTongLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addGap(12, 12, 12)
+                                        .addComponent(cbChonBangDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jpTongLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbAnhDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(0, 86, Short.MAX_VALUE))
                             .addGroup(jpTongLayout.createSequentialGroup()
                                 .addGap(6, 6, 6)
-                                .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbAnhDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jScrollPane2))))
                     .addGroup(jpTongLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1070, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 114, Short.MAX_VALUE))))
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane1)))
+                .addContainerGap())
         );
         jpTongLayout.setVerticalGroup(
             jpTongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,7 +437,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
                 .addComponent(lbAnhDiem)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane3.setViewportView(jpTong);
@@ -431,9 +446,7 @@ public class OverViewGradeStudent extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 1114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(55, Short.MAX_VALUE))
+            .addComponent(jScrollPane3)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -1,4 +1,3 @@
-
 package Login_test.model;
 
 public class modelLogin {
